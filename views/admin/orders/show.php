@@ -1,5 +1,4 @@
 <?php
-;
 if (!$_SESSION['username']) {
     header("Location: index.php?controller=admin&action=login");
 }
@@ -34,15 +33,15 @@ include_once('./views/admin/sidebar.php');
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                       <div class ="col-sm-12">
-                       <form action= "index.php?controller=admin&action=orders/search" method = "POST">
-                       Từ : <input name ="datebegin" type ="date"/> đến 
-                       <input name="dateend" type ="date"/>
-                       <input type="number" name="phone" placeholder="Nhập số điện thoại"/>
-                       <input class="btn btn-primary" type ="submit" value = "Tìm"/>
-                       <a href ="index.php?controller=admin&action=orders/index"class="btn btn-primary">Hủy</a>
-                       </form>
-                       </div>
+                        <div class="col-sm-12">
+                            <form action="index.php?controller=admin&action=orders/search" method="POST">
+                                Từ : <input name="datebegin" type="date" /> đến
+                                <input name="dateend" type="date" />
+                                <input type="number" name="phone" placeholder="Nhập số điện thoại" />
+                                <input class="btn btn-primary" type="submit" value="Tìm" />
+                                <a href="index.php?controller=admin&action=orders/index" class="btn btn-primary">Hủy</a>
+                            </form>
+                        </div>
 
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -64,7 +63,7 @@ include_once('./views/admin/sidebar.php');
                                 <tbody>
                                     <!--  -->
                                     <?php
-                                    foreach ($arr_orders as $key => $value) { 
+                                    foreach ($arr_orders as $key => $value) {
                                         if ($value['status'] < 0) {
                                             $status = 'Đã Hủy';
                                         }
@@ -77,25 +76,29 @@ include_once('./views/admin/sidebar.php');
                                         if ($value['status'] == 2) {
                                             $status = 'Hoàn Thành';
                                         }
-                                        ?>
-                                   
+                                    ?>
+
                                         <tr style="text-align: center;">
-                                            <td><?php echo $value['id'] ?></td>
-                                            <th><?php echo $value['phone'] ?></th>
-                                            <th><?php echo $value['address'] ?></th>
-                                            <th><?php echo $value['date'] ?></th>
-                                            <th><?php echo $value['time'] ?></th>
-                                            <td><?php echo $value['total'] ?></td>
-                                            <td><?php 
-                                                    echo $status;
-                                             
-                                                 ?></td>
-                                            <td><?php echo $row['notes'] ?></td>
-                                            <td class="text-center py-0 align-middle">
-                                                <div class="btn-group btn-group-sm">
-                                                    <a href="index.php?controller=admin&action=orderitems/order&id=<?php echo $value['id'] ?>" class="btn btn-info"><i class="fas fa-info"></i></a>
-                                                </div>
-                                            </td>
+                                            <?php foreach ($arr_orders as $key => $data) { ?>
+                                                <td><?php echo $data['id'] ?></td>
+                                                <th><?php echo $data['phone'] ?></th>
+                                                <th><?php echo $data['address'] ?></th>
+                                                <th><?php echo $data['date'] ?></th>
+                                                <th><?php echo $data['time'] ?></th>
+                                                <td><?php echo $data['total'] ?></td>
+                                                <td><?php
+                                                        echo $status;                                              
+
+                                                    ?></td>
+                                                <td><?php echo $data['notes'] ?></td>
+                                                <td class="text-center py-0 align-middle">
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a href="index.php?controller=admin&action=orderitems/order&id=<?php echo $data['id'] ?>" class="btn btn-info"><i class="fas fa-info"></i></a>
+                                                    </div>
+                                                </td>
+
+                                            <?php } ?>
+
                                         </tr>
                                     <?php
                                     } ?>
