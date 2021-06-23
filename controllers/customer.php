@@ -209,6 +209,7 @@ switch ($action) {
             $check = '<button onclick="order()" class="btn btn-success">Đặt</button>';
             $table = '';
             $sum = 0;
+            $status ='';
             setcookie('check', 'true', time() + 1800, '/');
 
             if (count($items) == 0) {
@@ -217,11 +218,20 @@ switch ($action) {
                 $table = "<button class='btn btn-warning' onclick = 'cancelOrder(" . $id_order . ")'>Hủy Đơn </button>";
             } else {
                 foreach ($items as $key => $value) {
+                    if ($value['status'] == 1) {
+                        $status = 'Đang Giao';
+                    }
+                    if ($value['status'] == 0) {
+                        $status = '<button class="btn btn-danger" onclick="deleteProduct(' . $value['id_order_items'] . ')" >Xóa</button>';
 
+                    }
+
+                    if ($value['status'] == 2) {
+                        $status = 'Hoàn Thành';
+                    }
                     $sum += $value['price'] * $value['qty'];
 
-                    $status = '<button class="btn btn-danger" onclick="deleteProduct(' . $value['id_order_items'] . ')" >Xóa</button>';
-
+                  
                     if ($value['status']) {
                         setcookie('check', 'true', time() - 2000, '/');
                     }

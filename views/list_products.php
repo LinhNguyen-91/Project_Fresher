@@ -117,7 +117,7 @@ $id_order = isset($_GET['id_order']) ? $_GET['id_order'] : $_COOKIE['id_order'];
                                         <th class="">Món</th>
                                         <th class="">Số Lượng</th>
                                         <th class="">Giá</th>
-                                        <th class="">Click</th>
+                                        <th class="">Trạng Thái</th>
                                     </tr>
                                 </thead>
                                 <tbody id="bill-product">

@@ -80,7 +80,7 @@ function order() {
                 let status = json.status;
                 if (status == 'ok') {
                     alert('Đặt hàng thành công !');
-                    window.location = './login.php';
+                    productsOrder();
                 }
             }
         });
