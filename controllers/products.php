@@ -19,32 +19,30 @@ switch ($action) {
         include_once('./views/admin/products/create.php');
         break;
     case 'store':
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $name_pr = $_POST['name_product'];
+        $price = $_POST['price'];
 
-            $name_pr = $_POST['name_product'];
-            $price = $_POST['price'];
+        $file = $_FILES['image']['tmp_name'];
+        $path = "controllers/uploads/";
+        $name = $_FILES['image']['name'];
 
-            $file = $_FILES['image']['tmp_name'];
-            $path = "controllers/uploads/";
-            $name = $_FILES['image']['name'];
+        $image_url = $path . $name;
+        $sql = "INSERT INTO products (name_product, image, price) VALUES ('$name_pr', '$image_url', '$price')";
 
-            $image_url = $path . $name;
-            $sql = "INSERT INTO products (name_product, image, price) VALUES ('$name_pr', '$image_url', '$price')";
+        if (mysqli_query($conn, $sql)) {
 
-            if (mysqli_query($conn, $sql)) {
+            move_uploaded_file($file, $path . $name);
 
-                move_uploaded_file($file, $path . $name);
-                
-                header("Location: index.php?controller=products");
-            } else {
-                ?>
-                <script>
-                    alert("Có lỗi, vui lòng thử lại");
-                    window.history.back();
-                </script>
-            <?php
-            }
+            header("Location: index.php?controller=products");
+        } else {
+?>
+            <script>
+                alert("Có lỗi, vui lòng thử lại");
+                window.history.back();
+            </script>
+        <?php
         }
+
 
         mysqli_close($conn);
 
@@ -71,31 +69,30 @@ switch ($action) {
     case 'update':
 
         $id = $_GET['id'];
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $name_product = $_POST['name_product'];
-            $price = $_POST['price'];
+        $name_product = $_POST['name_product'];
+        $price = $_POST['price'];
 
-            $file = $_FILES['image']['tmp_name'];
-            $path = "controllers/uploads/";
-            $name = $_FILES['image']['name'];
+        $file = $_FILES['image']['tmp_name'];
+        $path = "controllers/uploads/";
+        $name = $_FILES['image']['name'];
 
 
-            $image_url = $path . $name;
+        $image_url = $path . $name;
 
-            $sql = "UPDATE `products` SET `name_product`='$name_product',`image`='$image_url',`price`='$price' WHERE id=$id";
+        $sql = "UPDATE `products` SET `name_product`='$name_product',`image`='$image_url',`price`='$price' WHERE id=$id";
 
-            if (mysqli_query($conn, $sql)) {
-                move_uploaded_file($file, $path . $name);
-                  
-                header("Location: index.php?controller=products");
-            } else {
-            ?>
-                <script>
-                    alert("Có lỗi, vui lòng thử lại <?php echo $conn->error ?>");
-                    window.history.back();
-                </script>
-            <?php
-            }
+        if (mysqli_query($conn, $sql)) {
+            move_uploaded_file($file, $path . $name);
+
+            header("Location: index.php?controller=products");
+        } else {
+        ?>
+            <script>
+                alert("Có lỗi, vui lòng thử lại <?php echo $conn->error ?>");
+                window.history.back();
+            </script>
+        <?php
+
         };
 
         mysqli_close($conn);
@@ -113,7 +110,7 @@ switch ($action) {
                 alert("Có lỗi, có thể sản phẩm vẫn còn được dùng, vui lòng kiểm tra lại.");
                 window.history.back();
             </script>
-        <?php }
+<?php }
 
         mysqli_close($conn);
 

@@ -16,7 +16,6 @@ switch ($action) {
         }
 
         include_once('./views/login.php');
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $username = addslashes($_POST['username']);
             $password = addslashes($_POST['password']);
@@ -44,7 +43,7 @@ switch ($action) {
 
             $_SESSION['username'] = $username;
             header("Location: ./index.php?controller=admin");
-        }
+        
 
         break;
     case 'logout';

@@ -27,7 +27,6 @@ switch ($controller) {
         include './controllers/orderitems.php';
         break;
     default:
-    
         include './controllers/customer.php';
         break;
 }

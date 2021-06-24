@@ -15,6 +15,10 @@ body{
     list-style: none;
     padding-right: 30px;
 }
+.list-row {
+    width: auto;
+    overflow: auto;
+}
 
 .list-row {
     width: auto;

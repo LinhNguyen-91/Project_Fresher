@@ -32,6 +32,7 @@ function myOrder(phone) {
     });
 }
 function listProduct(id) {
+    console.log(id);
 
     jQuery.ajax({
         url: './index.php?action=listproduct',
@@ -46,6 +47,7 @@ function listProduct(id) {
     });
 }
 function insertProduct(id) {
+
 
     jQuery.ajax({
         url: './index.php?action=insert',
@@ -63,7 +65,9 @@ function insertProduct(id) {
             } else {
                 window.location = './login.php';
             }
+           
         }
+        
     });
 }
 function order() {
