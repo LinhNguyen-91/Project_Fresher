@@ -16,6 +16,11 @@ body{
     padding-right: 30px;
 }
 
+.list-row {
+    width: auto;
+    overflow: auto;
+}
+
 .flex-1{
     flex: 1;
 }
