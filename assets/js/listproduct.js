@@ -49,7 +49,7 @@ function insertProduct(id) {
     jQuery.ajax({
         url: './controllers/customer.php?action=insert',
         data: {
-            id: id,
+
             id_order: id_order,
             id_product: id,
         },
@@ -57,7 +57,10 @@ function insertProduct(id) {
         dataType: 'json',
         success: function (json) {
             if (json.status == 'ok') {
+               
                 productsOrder();
+            } else {
+                window.location = './login.php';
             }
         }
     });

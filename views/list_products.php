@@ -22,12 +22,12 @@ $id_order = isset($_GET['id_order']) ? $_GET['id_order'] : $_COOKIE['id_order'];
 </head>
 
 <body>
- 
+
     <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="titlerestoran">
-                    <div class="namerestoran" style ="text-align:center">
+                    <div class="namerestoran" style="text-align:center">
                         <h3><b>Danh Sách Đơn Hàng</b></h3>
                     </div>
 
@@ -59,11 +59,11 @@ $id_order = isset($_GET['id_order']) ? $_GET['id_order'] : $_COOKIE['id_order'];
         <div class="container">
             <div class="row justify-content-center">
                 <div class="banner-carouse text-white">
-                <div>
-                <h2 >Chào Mừng <?=$_COOKIE['phone']?> </h2>
-              
-                </div>
-                    
+                    <div>
+                        <h2>Chào Mừng <?= $_COOKIE['phone'] ?> </h2>
+
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@ $id_order = isset($_GET['id_order']) ? $_GET['id_order'] : $_COOKIE['id_order'];
                                 <li><button onclick="listProduct(0)" class="btn btn-secondary">Tất cả</button></li>
                                 <div id='categogy'></div>
                                 <?php foreach ($category as $key => $value) : ?>
-                                    <li><button onclick="listProduct(<?= $value['id'] ?>)" class="btn btn-secondary"><?=  number_format($value['price'], 0, ',', '.') . '<sup>đ</sup>' ?></button></li>
+                                    <li><button onclick="listProduct(<?= $value['id'] ?>)" class="btn btn-secondary"><?= number_format($value['price'], 0, ',', '.') . '<sup>đ</sup>' ?></button></li>
                                 <?php endforeach; ?>
                                 <button class="btn btn-secondary" onclick="myOrder(<?= $_COOKIE['phone'] ?>)">Đơn Hàng Của Bạn</button>
                             </ul>
@@ -104,14 +104,14 @@ $id_order = isset($_GET['id_order']) ? $_GET['id_order'] : $_COOKIE['id_order'];
                     </div>
                     <!--  -->
 
-                </div>  
+                </div>
                 <div class="col-xs-4 col-md-4 col-sm-4 col-4">
                     <div class="bill w-100 rounded" style="background-color:#e9e9e9">
                         <div class="d-flex justify-content-center">
                             <h4>Món đã chọn</h4>
                         </div>
-                        <div class="p-2" >
-                            <table class="table table-hover" >
+                        <div class="p-2">
+                            <table class="table table-hover">
                                 <thead>
                                     <tr class="col-lg-12">
                                         <th class="">Món</th>
@@ -141,7 +141,7 @@ $id_order = isset($_GET['id_order']) ? $_GET['id_order'] : $_COOKIE['id_order'];
     </section>
     <!--  -->
     <!-- Footer -->
-    <footer class="page-footer font-small mdb-color lighten-3 pt-4" >
+    <footer class="page-footer font-small mdb-color lighten-3 pt-4">
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3" style="background-color: #a0a2a5;">© 2020 Copyright:
             <a class="text-white" href="https://mdbootstrap.com/"> MDBootstrap.com</a>
@@ -163,7 +163,8 @@ $id_order = isset($_GET['id_order']) ? $_GET['id_order'] : $_COOKIE['id_order'];
         var id_order = <?= $id_order ?>;
         var add = '<?= $_COOKIE['add'] ?>';
         productsOrder();
-        listProduct(0)
+        listProduct(0);
+        setInterval(productsOrder, 30000);
     </script>
 
 

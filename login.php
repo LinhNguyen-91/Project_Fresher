@@ -6,27 +6,32 @@ define('FODER_CHUA', dirname(__FILE__));
 include_once FODER_CHUA . '/models/connect.php';
 $connect = new Connect();
 $conn = $connect->connect();
-mysqli_set_charset($conn,'UTF8');     
+mysqli_set_charset($conn, 'UTF8');
 $phone = isset($_POST['phone']) ? $_POST['phone'] : 0;
 $add = isset($_POST['add']) ? $_POST['add'] : 0;
 $time = date("H:i:s");
 $date = date("Y-m-d");
-if($phone !=0){
-$sql = "INSERT INTO orders (phone,address,date,time,total) VALUE ('$phone','$add', '$date', '$time',0)";
+if ($phone != 0) {
+     $sql = "INSERT INTO orders (phone,address,date,time,total,status) VALUE ('$phone','$add', '$date', '$time',0,0)";
 
-$sql2 = "SELECT * FROM orders ORDER BY id DESC LIMIT 1";
-$mysql = mysqli_query($conn, $sql);
+     $sql2 = "SELECT * FROM orders ORDER BY id DESC LIMIT 1";
+     $mysql = mysqli_query($conn, $sql);
 
-$resutls = mysqli_query($conn, $sql2);
+     $resutls = mysqli_query($conn, $sql2);
 
-while ($row = mysqli_fetch_assoc($resutls)) {
-     $items[] = $row;
-}
-$id = $items[0]['id'];
+     while ($row = mysqli_fetch_assoc($resutls)) {
+          $items[] = $row;
+     }
+     $id = $items[0]['id'];
 
-setcookie('phone', $phone, time() + 1800, '/');
-setcookie('add', $add, time() + 1800, '/');
-setcookie('id_order', $id, time() + 1800, '/');
+     setcookie('phone', $phone, time() + 1800, '/');
+     setcookie('add', $add, time() + 1800, '/');
+     setcookie('id_order', $id, time() + 1800, '/');
+     $return = [
+          'status' => 'ok'
+     ];
+     echo json_encode($return);
+     die();
 }
 ?>
 <!DOCTYPE html>
@@ -117,22 +122,22 @@ setcookie('id_order', $id, time() + 1800, '/');
                               url: url,
                               type: "post",
                               data: form_data,
-                            
-                              success: function() {
-                                  
-                                   window.location ='./index.php?';
-                                   
+                              dataType: 'json',
+                              success: function(json) {
+                                   if (json.status == 'ok') {
+                                        window.location = './index.php?';
+                                   }
                               }
 
                          });
-                         
+
                     }
 
                });
           });
      </script>
      <?php
-     
+
      ?>
 </body>
 

@@ -78,16 +78,34 @@ switch ($action) {
         break;
 
     case 'insert':
-
         $id_order = isset($_GET['id_order']) ? $_GET['id_order'] : 0;
         $id_product = isset($_GET['id_product']) ? $_GET['id_product'] : 0;
 
-        $sql = "INSERT INTO  order_items (id_order,id_product) VALUE ($id_order,$id_product)";
-        $resutls = mysqli_query($conn, $sql);
-        $return = [
-            'status' => 'ok'
-        ];
+        $ql = "SELECT * FROM orders WHERE id = $id_order AND status = 0";
+        $resu = mysqli_query($conn, $ql);
+
+        $items = [];
+        while ($row = mysqli_fetch_assoc($resu)) {
+            $items[] = $row;
+        }
+
+        if (count($items) == 0) {
+
+            setcookie('phone', $phone, time() - 2000, '/');
+            setcookie('add', $add, time() - 2000, '/');
+            setcookie('id_order', $add, time() - 2000, '/');
+            $return = [
+                'status' => 'login'
+            ];
+        } else {
+            $sql = "INSERT INTO  order_items (id_order,id_product) VALUE ($id_order,$id_product)";
+            $resutls = mysqli_query($conn, $sql);
+            $return = [
+                'status' => 'ok'
+            ];
+        }
         echo json_encode($return);
+        die();
         break;
 
     case 'order':
@@ -96,20 +114,22 @@ switch ($action) {
 
         $sql = "UPDATE  orders SET status = 1, total = $sum   WHERE id =$id";
         $resutls = mysqli_query($conn, $sql);
-        if ($id_order) {
-            setcookie('phone', $phone, time() - 2000, '/');
-            setcookie('add', $add, time() - 2000, '/');
-            setcookie('id_order', $add, time() - 2000, '/');
-        }
+        // if ($id_order) {
+        //     setcookie('phone', $phone, time() - 2000, '/');
+        //     setcookie('add', $add, time() - 2000, '/');
+        //     setcookie('id_order', $add, time() - 2000, '/');
+        // }
+
         $return = [
             'status' => 'ok'
         ];
         echo json_encode($return);
+        die();
         break;
     case 'myorder':
 
         if ($phone) {
-            $sql = "SELECT * FROM orders WHERE phone= $phone ORDER BY id desc";
+            $sql = "SELECT * FROM orders WHERE phone= $phone AND status >0 ORDER BY id desc";
             $resutls = mysqli_query($conn, $sql);
             $items = [];
             while ($row = mysqli_fetch_assoc($resutls)) {
@@ -120,12 +140,6 @@ switch ($action) {
             $status = '';
             foreach ($items as $key => $value) {
                 $date = strtotime($value['date']);
-                if ($value['status'] < 0) {
-                    $status = 'Đã Hủy';
-                }
-                if ($value['status'] == 0) {
-                    $status = 'Chờ xác nhận';
-                }
                 if ($value['status'] == 1) {
                     $status = 'Đang Giao';
                 }
@@ -177,11 +191,9 @@ switch ($action) {
         }
         break;
     case 'productorder':
-
-        if ($id_order) {
-            $sql2 = "SET GLOBAL sql_mode = (SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));";
-            $resutls2 = mysqli_query($conn, $sql2);
-            $sql = "SELECT order_items.id as id_order_items,
+        $sql2 = "SET GLOBAL sql_mode = (SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));";
+        $resutls2 = mysqli_query($conn, $sql2);
+        $sql = "SELECT order_items.id as id_order_items,
             products.id as id, 
             orders.status as status,
              order_items.id_product, 
@@ -199,75 +211,77 @@ switch ($action) {
                      WHERE order_items.id_order = $id_order
                      GROUP BY order_items.id_product";
 
-            $resutls = mysqli_query($conn, $sql);
+        $resutls = mysqli_query($conn, $sql);
 
-            $items = [];
-            while ($row = mysqli_fetch_assoc($resutls)) {
-                $items[] = $row;
-            }
+        $items = [];
+        while ($row = mysqli_fetch_assoc($resutls)) {
+            $items[] = $row;
+        }
 
-            $check = '<button onclick="order()" class="btn btn-success">Đặt</button>';
-            $table = '';
-            $sum = 0;
-            $status ='';
-            setcookie('check', 'true', time() + 1800, '/');
+        $check = '<button onclick="order()" class="btn btn-success">Đặt</button>';
+        $table = '';
+        $sum = 0;
+        $status = '';
+        $cancel = "<button class='btn btn-warning' onclick = 'cancelOrder(" . $id_order . ")'>Hủy Đơn </button>";
+        setcookie('check', 'true', time() + 1800, '/');
 
-            if (count($items) == 0) {
+        if (count($items) == 0) {
 
-                setcookie('check', 'true', time() - 2000, '/');
-                $table = "<button class='btn btn-warning' onclick = 'cancelOrder(" . $id_order . ")'>Hủy Đơn </button>";
-            } else {
-                foreach ($items as $key => $value) {
-                    if ($value['status'] == 1) {
-                        $status = 'Đang Giao';
-                    }
-                    if ($value['status'] == 0) {
-                        $status = '<button class="btn btn-danger" onclick="deleteProduct(' . $value['id_order_items'] . ')" >Xóa</button>';
+            setcookie('check', 'true', time() - 2000, '/');
+            $table = "<button class='btn btn-warning' onclick = 'cancelOrder(" . $id_order . ")'>Hủy Đơn </button>";
+        } else {
+            foreach ($items as $key => $value) {
+                if ($value['status'] == 1) {
+                    $status = 'Đang Giao';
+                    $check = '';
+                    $cancel = "<a class='btn btn-warning'  '>Thoát </a>";
+                }
+                if ($value['status'] == 0) {
+                    $status = '<button class="btn btn-danger" onclick="deleteProduct(' . $value['id_order_items'] . ')" >Xóa</button>';
+                }
 
-                    }
+                if ($value['status'] == 2) {
+                    $status = 'Hoàn Thành';
+                }
+                $sum += $value['price'] * $value['qty'];
 
-                    if ($value['status'] == 2) {
-                        $status = 'Hoàn Thành';
-                    }
-                    $sum += $value['price'] * $value['qty'];
 
-                  
-                    if ($value['status']) {
-                        setcookie('check', 'true', time() - 2000, '/');
-                    }
-                    $table .= '<tr>';
-                    $table .= '<td data-th="Product">';
-                    $table .= $value['product'];
-                    $table .= '</td>';
-                    $table .= '<td>';
-                    $table .= $value['qty'];
-                    $table .= '</td>';
-                    $table .= '<td data-th="Price">';
-                    $table .= number_format($value['price'], 0, ',', '.') . '<sup>đ</sup>';
-                    $table .= '</td>';
-                    $table .= '<td data-th="">';
-                    $table .= $status;
-                    $table .= '</td></tr>';
+                if ($value['status']) {
+                    setcookie('check', 'true', time() - 2000, '/');
                 }
                 $table .= '<tr>';
-                $table .= '<td>';
-                $table .= ' <button onclick="order()" class="btn btn-success">Đặt</button>';
+                $table .= '<td data-th="Product">';
+                $table .= $value['product'];
                 $table .= '</td>';
                 $table .= '<td>';
-                $table .= "<button class='btn btn-warning' onclick = 'cancelOrder(" . $id_order . ")'>Hủy Đơn </button>";
+                $table .= $value['qty'];
                 $table .= '</td>';
-                $table .= '<th>';
-                $table .= 'Tổng :';
-                $table .= '</th>';
-                $table .= "<th id='data_sum' data=" . $sum . ">";
-                $table .= number_format($sum, 0, ',', '.') . '<sup>đ</sup>';
-                $table .= '</th>';
-                $table .= '</tr>';
-                $table .= '</br>';
+                $table .= '<td data-th="Price">';
+                $table .= number_format($value['price'], 0, ',', '.') . '<sup>đ</sup>';
+                $table .= '</td>';
+                $table .= '<td data-th="">';
+                $table .= $status;
+                $table .= '</td></tr>';
             }
-
-            echo $table;
+            $table .= '<tr>';
+            $table .= '<td>';
+            $table .= $check;
+            $table .= '</td>';
+            $table .= '<td>';
+            $table .= $cancel;
+            $table .= '</td>';
+            $table .= '<th>';
+            $table .= 'Tổng :';
+            $table .= '</th>';
+            $table .= "<th id='data_sum' data=" . $sum . ">";
+            $table .= number_format($sum, 0, ',', '.') . '<sup>đ</sup>';
+            $table .= '</th>';
+            $table .= '</tr>';
+            $table .= '</br>';
         }
+
+        echo $table;
+        die();
         break;
 
     default:
