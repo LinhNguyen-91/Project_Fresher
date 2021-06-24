@@ -67,12 +67,12 @@ include_once('./views/admin/sidebar.php');
                                                 ?></td>
                                             <td class="text-center py-0 align-middle">
                                                 <div class="btn-group btn-group-sm">
-                                                    <a href="index.php?controller=admin&action=products/edit&id=<?php echo $value['id']  ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                                    <a href="index.php?controller=products&action=edit&id=<?php echo $value['id']  ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
                                                     <a class="btn btn-danger" onclick="deleteItems(<?php echo $value['id'] ?>)"><i class="fas fa-trash"></i></a>
                                                     <script>
                                                         function deleteItems(id) {
                                                             if (confirm("Bạn có chắc xóa sản phẩm này?")) {
-                                                                window.location.href = "index.php?controller=admin&action=products/delete&id=" + id;
+                                                                window.location.href = "index.php?controller=products&action=delete&id=" + id;
                                                             } else {
                                                                 exit();
                                                             }

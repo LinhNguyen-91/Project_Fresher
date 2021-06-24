@@ -35,12 +35,12 @@ include_once('./views/admin/sidebar.php');
                 <div class="col-12">
                     <div class="card">
                        <div class ="col-sm-12">
-                       <form action= "index.php?controller=admin&action=orders/search" method = "POST">
+                       <form action= "index.php?controller=orders&action=search" method = "POST">
                        Từ : <input name ="datebegin" type ="date"/> đến 
                        <input name="dateend" type ="date"/>
                        <input type="number" name="phone" placeholder="Nhập số điện thoại"/>
                        <input class="btn btn-primary" type ="submit" value = "Tìm"/>
-                       <a href ="index.php?controller=admin&action=orders/index"class="btn btn-primary">Hủy</a>
+                       <a href ="index.php?controller=orders&action=index"class="btn btn-primary">Hủy</a>
                        </form>
                        </div>
 
@@ -93,7 +93,7 @@ include_once('./views/admin/sidebar.php');
                                             <td><?php echo $row['notes'] ?></td>
                                             <td class="text-center py-0 align-middle">
                                                 <div class="btn-group btn-group-sm">
-                                                    <a href="index.php?controller=admin&action=orderitems/order&id=<?php echo $value['id'] ?>" class="btn btn-info"><i class="fas fa-info"></i></a>
+                                                    <a href="index.php?controller=orderitems&action=order&id=<?php echo $value['id'] ?>" class="btn btn-info"><i class="fas fa-info"></i></a>
                                                 </div>
                                             </td>
                                         </tr>

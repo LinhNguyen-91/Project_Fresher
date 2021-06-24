@@ -1,7 +1,7 @@
 <?php
 // header('Access-Control-Allow-Origin:http://localhost');
 
-include_once '/var/www/html/Project/models/connect.php';
+include_once './models/connect.php';
 $action = isset($_GET['action']) ? $_GET['action'] : 'list';
 $connect = new Connect();
 $conn = $connect->connect();
