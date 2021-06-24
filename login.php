@@ -111,7 +111,7 @@ setcookie('id_order', $id, time() + 1800, '/');
                     },
                     submitHandler: function() {
                          var form_data = jQuery('#form-login').serialize();
-                         var url = 'http://localhost/Project/login.php';
+                         var url = 'http://localhost/Project_Fresher/login.php';
 
                          jQuery.ajax({
                               url: url,

@@ -30,7 +30,7 @@ include_once('./views/admin/sidebar.php');
 
     <!-- Main content -->
     <section class="content">
-        <form id="create_product" action="./index.php?controller=admin&action=categories/store" method="POST" enctype="multipart/form-data">
+        <form id="create_product" action="./index.php?controller=categories&action=store" method="POST" enctype="multipart/form-data">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
@@ -64,7 +64,7 @@ include_once('./views/admin/sidebar.php');
             <!-- /.container-fluid -->
             <div class="row">
                 <div class="col-12">
-                    <a href="./index.php?controller=admin&action=products/edit&id=21" class="btn btn-secondary">Hủy</a>
+                    <a href="./index.php?controller=categories&action=edit&id=21" class="btn btn-secondary">Hủy</a>
                     <input id="sub" type="submit" value="Thêm mới danh mục" class="btn btn-success float-right">
                 </div>
             </div>
