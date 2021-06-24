@@ -20,3 +20,6 @@ class Connect
 
     }
 }
+$connect = new Connect();
+$conn = $connect->connect();
+mysqli_set_charset($conn, 'UTF8');
