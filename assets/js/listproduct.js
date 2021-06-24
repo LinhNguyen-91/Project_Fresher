@@ -3,7 +3,7 @@ function cancelOrder(id_order) {
     if (confi) {
 
         jQuery.ajax({
-            url: './controllers/customer.php?action=cancelorder',
+            url: './index.php?action=cancelorder',
             data: {
                 id_order: id_order,
             },
@@ -21,7 +21,7 @@ function myOrder(phone) {
     $('#modal').modal('show');
 
     jQuery.ajax({
-        url: './controllers/customer.php?action=myorder',
+        url: './index.php?action=myorder',
         data: {
             phone: phone,
         },
@@ -34,20 +34,21 @@ function myOrder(phone) {
 function listProduct(id) {
 
     jQuery.ajax({
-        url: './controllers/customer.php?action=listproduct',
+        url: './index.php?action=listproduct',
         data: {
             id: id,
         },
         type: "GET",
         success: function (html) {
             $("#listproduct").html(html);
-        }
+        },
+    
     });
 }
 function insertProduct(id) {
 
     jQuery.ajax({
-        url: './controllers/customer.php?action=insert',
+        url: './index.php?action=insert',
         data: {
 
             id_order: id_order,
@@ -72,7 +73,7 @@ function order() {
     if (confi) {
 
         jQuery.ajax({
-            url: './controllers/customer.php?action=order',
+            url: './index.php?action=order',
             data: {
                 id: id_order,
                 sum: dataSum,
@@ -92,7 +93,7 @@ function order() {
 function deleteProduct(id) {
 
     jQuery.ajax({
-        url: './controllers/customer.php?action=deleteproduct',
+        url: './index.php?action=deleteproduct',
         data: {
             id: id,
         },
@@ -109,7 +110,7 @@ function deleteProduct(id) {
 function productsOrder() {
 
     jQuery.ajax({
-        url: './controllers/customer.php?action=productorder',
+        url: './index.php?action=productorder',
         data: {
             id_order: id_order,
         },

@@ -1,6 +1,4 @@
 <?php
-// header('Access-Control-Allow-Origin:http://localhost');
-
 include_once './models/connect.php';
 $action = isset($_GET['action']) ? $_GET['action'] : 'list';
 $connect = new Connect();
@@ -12,6 +10,7 @@ $phone = isset($_GET['phone']) ? $_GET['phone'] : 0;
 
 switch ($action) {
     case 'listproduct':
+       
         $id = $_GET['id'];
         $sql = '';
         if ($id == 0) {
@@ -114,12 +113,6 @@ switch ($action) {
 
         $sql = "UPDATE  orders SET status = 1, total = $sum   WHERE id =$id";
         $resutls = mysqli_query($conn, $sql);
-        // if ($id_order) {
-        //     setcookie('phone', $phone, time() - 2000, '/');
-        //     setcookie('add', $add, time() - 2000, '/');
-        //     setcookie('id_order', $add, time() - 2000, '/');
-        // }
-
         $return = [
             'status' => 'ok'
         ];
@@ -191,6 +184,7 @@ switch ($action) {
         }
         break;
     case 'productorder':
+        
         $sql2 = "SET GLOBAL sql_mode = (SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));";
         $resutls2 = mysqli_query($conn, $sql2);
         $sql = "SELECT order_items.id as id_order_items,
