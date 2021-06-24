@@ -33,7 +33,7 @@ include_once('./views/admin/sidebar.php');
 
     <!-- Main content -->
     <section class="content">
-        <form id="create_product" action="./index.php?controller=admin&action=categories/update&id=<?php echo $id?>" method="POST" enctype="multipart/form-data">
+        <form id="create_product" action="./index.php?controller=categories&action=update&id=<?php echo $id?>" method="POST" enctype="multipart/form-data">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
@@ -72,7 +72,7 @@ include_once('./views/admin/sidebar.php');
             <!-- /.container-fluid -->
             <div class="row">
                 <div class="col-12">
-                    <a href="controller=admin&action=categories/index" class="btn btn-secondary">Hủy</a>
+                    <a href="controller=categories" class="btn btn-secondary">Hủy</a>
                     <input id="sub" type="submit" value="Cập nhật" class="btn btn-success float-right">
                 </div>
             </div>
