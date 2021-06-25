@@ -4,8 +4,8 @@ if (!$_SESSION['username']) {
 }
 $connect = new Connect();
 $conn = $connect->connect();
-include_once('./views/admin/header.php');
-include_once('./views/admin/sidebar.php');
+include_once('./views/masterpage/admin/header.php');
+include_once('./views/masterpage/admin/sidebar.php');
 ?>
 
 <div class="content-wrapper">
@@ -110,5 +110,5 @@ include_once('./views/admin/sidebar.php');
 </div>
 
 <?php
-include_once('./views/admin/footer.php')
+include_once('./views/masterpage/admin/footer.php')
 ?>

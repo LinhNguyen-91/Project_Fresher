@@ -2,8 +2,8 @@
 if (!$_SESSION['username']) {
     header("Location: index.php?controller=admin&action=login");
 }
-include_once('./views/admin/header.php');
-include_once('./views/admin/sidebar.php');
+include_once('./views/masterpage/admin/header.php');
+include_once('./views/masterpage/admin/sidebar.php');
 ?>
 
 
@@ -57,11 +57,19 @@ include_once('./views/admin/sidebar.php');
                                                 </tr>
                                                 <tr>
                                                     <th>Tình trạng</th>
-                                                    <th><?php if ($value['status'] == 0) {
-                                                            echo "Not shipped";
-                                                        } else {
-                                                            echo "Shipped";
-                                                        }  ?></th>
+                                                    <th><?php if ($value['status'] < 0) {
+                                                            echo 'Đã Hủy';
+                                                        }
+                                                        if ($value['status'] == 0) {
+                                                            echo 'Chờ xác nhận';
+                                                        }
+                                                        if ($value['status'] == 1) {
+                                                            echo 'Đang Giao';
+                                                        }
+                                                        if ($value['status'] == 2) {
+                                                            echo 'Hoàn Thành';
+                                                        }
+                                                        ?></th>
                                                 </tr>
                                                 <tr>
                                                     <th>Tổng giá</th>
@@ -79,7 +87,8 @@ include_once('./views/admin/sidebar.php');
                                                     <label>Tình trạng</label>
                                                     <select type="text" name="status" class="form-control">
                                                         <option value="0">Chưa giao</option>
-                                                        <option value="1">Đã giao</option>
+                                                        <option value="1">Đang giao</option>
+                                                        <option value="2">Hoàn thành</option>
                                                     </select>
                                                 </div>
                                                 <input type="submit" name="submit" value="Cập nhật" class="btn btn-primary">
@@ -142,5 +151,5 @@ include_once('./views/admin/sidebar.php');
 
 
 <?php
-include_once('./views/admin/footer.php')
+include_once('./views/masterpage/admin/footer.php')
 ?>
