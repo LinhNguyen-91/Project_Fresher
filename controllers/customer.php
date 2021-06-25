@@ -55,12 +55,6 @@ switch ($action) {
     default:
 
         $sql = "SELECT * FROM category";
-        $sq = mysqli_query($conn, "SELECT products.id as id, products.name_product as product,products.image as imag,category.price as price FROM products
-        JOIN category
-        ON products.price = category.id");
-
-        // var_dump ($sq);
-        // die();
         $resutls = mysqli_query($conn, $sql);
 
         $category = [];

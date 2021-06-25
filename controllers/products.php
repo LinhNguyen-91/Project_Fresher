@@ -35,7 +35,7 @@ switch ($action) {
 
             header("Location: index.php?controller=products");
         } else {
-?>
+        ?>
             <script>
                 alert("Có lỗi, vui lòng thử lại");
                 window.history.back();
@@ -110,7 +110,7 @@ switch ($action) {
                 alert("Có lỗi, có thể sản phẩm vẫn còn được dùng, vui lòng kiểm tra lại.");
                 window.history.back();
             </script>
-<?php }
+        <?php }
 
         mysqli_close($conn);
 
