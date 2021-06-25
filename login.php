@@ -96,7 +96,8 @@ if ($phone != 0) {
                          phone: {
                               required: true,
                               minlength: 10,
-                              maxlength: 10
+                              maxlength: 10,
+                              number : true
                          },
                          add: {
                               required: true,
@@ -108,6 +109,7 @@ if ($phone != 0) {
                               required: "Vui lòng nhập số điện thoại",
                               minlength: "Nhập số di động 10 số của bạn",
                               maxlength: "Nhập số di động 10 số của bạn",
+                              number : "Vui lòng nhập số "
                          },
                          add: {
                               required: "Vui lòng nhập địa chỉ ship đến",

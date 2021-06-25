@@ -39,11 +39,6 @@ switch ($action) {
 
         break;
 
-    case 'category':
-        include_once './controllers/customers/categoriesProduct.php';
-
-
-        break;
 
     case 'productorder':
         include_once './controllers/customers/productOrders.php';

@@ -1,4 +1,4 @@
-<?php 
+<?php
 $sql2 = "SET GLOBAL sql_mode = (SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));";
 $resutls2 = mysqli_query($conn, $sql2);
 $sql = "SELECT order_items.id as id_order_items,
@@ -57,35 +57,15 @@ if (count($items) == 0) {
         if ($value['status']) {
             setcookie('check', 'true', time() - 2000, '/');
         }
-        $table .= '<tr>';
-        $table .= '<td data-th="Product">';
-        $table .= $value['product'];
-        $table .= '</td>';
-        $table .= '<td>';
-        $table .= $value['qty'];
-        $table .= '</td>';
-        $table .= '<td data-th="Price">';
-        $table .= number_format($value['price'], 0, ',', '.') . '<sup>đ</sup>';
-        $table .= '</td>';
-        $table .= '<td data-th="">';
-        $table .= $status;
-        $table .= '</td></tr>';
+
+        $table .= '<tr><td data-th="Product">' .  $value['product'] . '</td>
+            <td>' . $value['qty'] . '</td><td data-th="Price">' .
+            number_format($value['price'], 0, ',', '.') . '<sup>đ</sup>
+            </td><td data-th="">' . $status . '</td></tr>';
     }
-    $table .= '<tr>';
-    $table .= '<td>';
-    $table .= $check;
-    $table .= '</td>';
-    $table .= '<td>';
-    $table .= $cancel;
-    $table .= '</td>';
-    $table .= '<th>';
-    $table .= 'Tổng :';
-    $table .= '</th>';
-    $table .= "<th id='data_sum' data=" . $sum . ">";
-    $table .= number_format($sum, 0, ',', '.') . '<sup>đ</sup>';
-    $table .= '</th>';
-    $table .= '</tr>';
-    $table .= '</br>';
+    $table .= "<tr><td>" . $check . "</td><td>" . $cancel . "</td><th>Tổng :</th>
+    <th id='data_sum' data=" . $sum . ">" . number_format($sum, 0, ',', '.') . "<sup>đ</sup> 
+    </th></tr></br>";
 }
 
 echo $table;

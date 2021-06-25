@@ -15,28 +15,10 @@ foreach ($items as $key => $value) {
     if ($value['status'] == 2) {
         $status = 'Hoàn Thành';
     }
-    $table .= '<tr>';
-
-    $table .= '<td>';
-    $table .= ++$key;
-    $table .= '</td>';
-
-    $table .= '<td>';
-    $table .=  $value['address'];
-    $table .= '</td>';
-    $table .= '<td>';
-    $table .= date('d/m/Y', $date);
-    $table .= '</td>';
-    $table .= '<td>';
-    $table .= $value['time'];
-    $table .= '</td>';
-    $table .= '<td>';
-    $table .= number_format($value['total'], 0, ',', '.') . '<sup>đ</sup>';
-    $table .= '</td>';
-    $table .= '<td>';
-    $table .=  $status;
-    $table .= '</td>';
-    $table .= '</tr>';
+    $table .= '<tr><td>' . ++$key . '</td><td>' . $value['address'] . '</td>
+    <td>' .  date('d/m/Y', $date) . '</td><td>' . $value['time'] . '</td>
+    <td>' . number_format($value['total'], 0, ',', '.') . '<sup>đ</sup>' .
+        '</td><td>' . $status . '</td></tr>';
 }
 
 echo $table;
