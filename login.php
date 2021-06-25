@@ -116,7 +116,7 @@ if ($phone != 0) {
                     },
                     submitHandler: function() {
                          var form_data = jQuery('#form-login').serialize();
-                         var url = 'http://localhost/laravel/Project_Fresher/login.php';
+                         var url = './login.php';
 
                          jQuery.ajax({
                               url: url,

@@ -63,7 +63,10 @@ function insertProduct(id) {
                
                 productsOrder();
             } else {
+                let confi = confirm('Đơn bạn đã xác nhận bạn muốn tạo đơn khác?')
+                if (confi){
                 window.location = './login.php';
+                }
             }
            
         }

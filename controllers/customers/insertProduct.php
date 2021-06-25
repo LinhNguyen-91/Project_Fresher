@@ -12,9 +12,7 @@ while ($row = mysqli_fetch_assoc($resu)) {
 
 if (count($items) == 0) {
 
-    setcookie('phone', $phone, time() - 2000, '/');
-    setcookie('add', $add, time() - 2000, '/');
-    setcookie('id_order', $add, time() - 2000, '/');
+   
     $return = [
         'status' => 'login'
     ];
