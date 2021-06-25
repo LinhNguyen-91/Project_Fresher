@@ -122,3 +122,20 @@ function productsOrder() {
         }
     });
 }
+function exit (){
+    jQuery.ajax({
+        url: './index.php?action=exit',
+      
+        type: "GET",
+        dataType: 'json',
+        success: function (json) {
+            let status = json.status;
+            if (status == 'ok') {
+                let confi = confirm ('Bạn muốn thoát?')
+                if (confi){
+                window.location = './login.php';
+                }
+            }
+        }
+    });
+}
