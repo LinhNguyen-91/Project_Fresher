@@ -1,12 +1,7 @@
 <?php
-
-header('Access-Control-Allow-Origin: URL1');
 date_default_timezone_set('Asia/Ho_Chi_Minh');
-define('FODER_CHUA', dirname(__FILE__));
-include_once FODER_CHUA . '/models/connect.php';
-$connect = new Connect();
-$conn = $connect->connect();
-mysqli_set_charset($conn, 'UTF8');
+include_once './models/connect.php';
+
 $phone = isset($_POST['phone']) ? $_POST['phone'] : 0;
 $add = isset($_POST['add']) ? $_POST['add'] : 0;
 $time = date("H:i:s");
