@@ -2,9 +2,9 @@
 if (!$_SESSION['username']) {
     header("Location: index.php?controller=admin&action=login");
 }
-include_once('./views/admin/path.php');
-include_once('./views/admin/header.php');
-include_once('./views/admin/sidebar.php');
+include_once('./views/masterpage/admin/path.php');
+include_once('./views/masterpage/admin/header.php');
+include_once('./views/masterpage/admin/sidebar.php');
 ?>
 
 <div class="content-wrapper">
@@ -61,25 +61,25 @@ include_once('./views/admin/sidebar.php');
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!--  -->
-                                    <?php
-                                    foreach ($arr_orders as $key => $value) {
-                                        if ($value['status'] < 0) {
-                                            $status = 'Đã Hủy';
-                                        }
-                                        if ($value['status'] == 0) {
-                                            $status = 'Chờ xác nhận';
-                                        }
-                                        if ($value['status'] == 1) {
-                                            $status = 'Đang Giao';
-                                        }
-                                        if ($value['status'] == 2) {
-                                            $status = 'Hoàn Thành';
-                                        }
-                                    ?>
+                                <?php foreach ($arr_orders as $key => $data) { 
+                                      if ($value['status'] < 0) {
+                                                    $status = 'Đã Hủy';
+                                                }
+                                                if ($value['status'] == 0) {
+                                                    $status = 'Chờ xác nhận';
+                                                }
+                                                if ($value['status'] == 1) {
+                                                    $status = 'Đang Giao';
+                                                }
+                                                if ($value['status'] == 2) {
+                                                    $status = 'Hoàn Thành';
+                                                }
 
+                                    ?>
                                         <tr style="text-align: center;">
-                                            <?php foreach ($arr_orders as $key => $data) { ?>
+                                            
+                                              
+                                                
                                                 <td><?php echo $data['id'] ?></td>
                                                 <th><?php echo $data['phone'] ?></th>
                                                 <th><?php echo $data['address'] ?></th>
@@ -97,11 +97,10 @@ include_once('./views/admin/sidebar.php');
                                                     </div>
                                                 </td>
 
-                                            <?php } ?>
+                                          
 
                                         </tr>
-                                    <?php
-                                    } ?>
+                                        <?php } ?>
 
                                     <!--  -->
                                 </tbody>
@@ -136,5 +135,5 @@ include_once('./views/admin/sidebar.php');
 
 
 <?php
-include_once('./views/admin/footer.php')
+include_once('./views/masterpage/admin/footer.php')
 ?>

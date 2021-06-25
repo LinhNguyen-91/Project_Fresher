@@ -16,7 +16,6 @@ switch ($action) {
         }
 
         include_once('./views/login.php');
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $username = addslashes($_POST['username']);
             $password = addslashes($_POST['password']);
@@ -44,7 +43,7 @@ switch ($action) {
 
             $_SESSION['username'] = $username;
             header("Location: ./index.php?controller=admin");
-        }
+        
 
         break;
     case 'logout';
@@ -56,7 +55,7 @@ switch ($action) {
 
         $count_pr = mysqli_query($conn, "SELECT COUNT(*) AS 'count' FROM products");
         $count_orders = mysqli_query($conn, "SELECT COUNT(*) AS 'count' FROM orders");
-        $total_price = mysqli_query($conn, "SELECT SUM(total) AS 'total' FROM orders WHERE status = '1'");
+        $total_price = mysqli_query($conn, "SELECT SUM(total) AS 'total' FROM orders WHERE status = '2'");
         $row_pr = mysqli_fetch_assoc($count_pr);
         $row_orders = mysqli_fetch_assoc($count_orders);
         $row_total = mysqli_fetch_assoc($total_price);

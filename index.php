@@ -10,27 +10,21 @@ $controller = isset($_GET['controller']) ? $_GET['controller'] : 'user';
 switch ($controller) {
 
     case 'admin';
-   
-        include './controllers/admin.php';
+        include_once './controllers/admin/admin.php';
         break;
-        
-        case 'products';
-        include './controllers/products.php';
+    case 'products';
+        include_once './controllers/admin/products/products.php';
         break;
     case 'categories';
-        include './controllers/categories.php';
+        include_once './controllers/admin/categories/categories.php';
         break;
     case 'orders';
-        include './controllers/orders.php';
+        include_once './controllers/admin/orders/orders.php';
         break;
     case 'orderitems';
-        include './controllers/orderitems.php';
+        include_once './controllers/admin/orderitems/orderitems.php';
         break;
     default:
-    
         include './controllers/customer.php';
         break;
 }
-
-?>
-

@@ -2,9 +2,9 @@
 if (!$_SESSION['username']) {
     header("Location: index.php?controller=admin&action=login");
 }
-include_once('./views/admin/path.php');
-include_once('./views/admin/header.php');
-include_once('./views/admin/sidebar.php');
+include_once('./views/masterpage/admin/path.php');
+include_once('./views/masterpage/admin/header.php');
+include_once('./views/masterpage/admin/sidebar.php');
 ?>
 
 
@@ -72,7 +72,7 @@ include_once('./views/admin/sidebar.php');
             <!-- /.container-fluid -->
             <div class="row">
                 <div class="col-12">
-                    <a href="controller=categories" class="btn btn-secondary">Hủy</a>
+                    <a href="index.php?controller=categories" class="btn btn-secondary">Hủy</a>
                     <input id="sub" type="submit" value="Cập nhật" class="btn btn-success float-right">
                 </div>
             </div>
@@ -83,5 +83,5 @@ include_once('./views/admin/sidebar.php');
 
 
 <?php
-include_once('./views/admin/footer.php')
+include_once('./views/masterpage/admin/footer.php')
 ?>

@@ -8,7 +8,7 @@ class Connect
     public $host;
     public $dbname;
 
-    public function __construct($host = 'localhost', $username = 'nhatlinh', $password = 'Nhatlinh91', $dbname = 'order_rice')
+    public function __construct($host = 'localhost', $username = 'tuyen', $password = 'tuyen160820', $dbname = 'order_rice')
     {
         $this->host = $host;
         $this->username = $username;

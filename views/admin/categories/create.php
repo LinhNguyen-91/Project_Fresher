@@ -2,9 +2,9 @@
 if (!$_SESSION['username']) {
     header("Location: index.php?controller=admin&action=login");
 }
-include_once('./views/admin/path.php');
-include_once('./views/admin/header.php');
-include_once('./views/admin/sidebar.php');
+include_once('./views/masterpage/admin/path.php');
+include_once('./views/masterpage/admin/header.php');
+include_once('./views/masterpage/admin/sidebar.php');
 ?>
     
 <div class="content-wrapper">
@@ -78,5 +78,5 @@ include_once('./views/admin/sidebar.php');
 
 
 <?php
-include_once('./views/admin/footer.php')
+include_once('./views/masterpage/admin/footer.php')
 ?>
